@@ -32,7 +32,6 @@
           ags.packages.${system}.wireplumber
           ags.packages.${system}.hyprland
           ags.packages.${system}.tray
-          pkgs.upower
         ];
       };
     };
