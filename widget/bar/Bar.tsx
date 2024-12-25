@@ -30,19 +30,20 @@ function Wifi() {
     tooltipText={bind(wifi, "ssid").as(String)}
     className="Wifi"
     icon={bind(wifi, "iconName")}
-  />
+    iconSize={22} />
 }
 
 function AudioSlider() {
   const speaker = Wp.get_default()?.audio.defaultSpeaker!
 
   return <box className="AudioSlider" css="min-width: 140px">
-    <icon icon={bind(speaker, "volumeIcon")} />
-      <slider
-        hexpand
-        onDragged={({ value }) => speaker.volume = value}
-        value={bind(speaker, "volume")}
-    />
+    <icon 
+      icon={bind(speaker, "volumeIcon")}
+      iconSize={22} />
+    <slider
+      hexpand
+      onDragged={({ value }) => speaker.volume = value}
+      value={bind(speaker, "volume")} />
   </box>
 }
 
@@ -51,7 +52,9 @@ function BatteryLevel() {
 
   return <box className="Battery"
     visible={bind(bat, "isPresent")}>
-    <icon icon={bind(bat, "batteryIconName")} />
+    <icon 
+      icon={bind(bat, "batteryIconName")} 
+      iconSize={22} />
     <label label={bind(bat, "percentage").as(p =>
       `${Math.floor(p * 100)} %`
     )} />
@@ -77,7 +80,7 @@ function Workspaces() {
   </box>
 }
 
-function Time({ format = "%H:%M - %A %e." }) {
+function Time({ format = "%H:%M - %A, %d/%m" }) {
   const time = Variable<string>("").poll(1000, () =>
     GLib.DateTime.new_now_local().format(format)!)
 
