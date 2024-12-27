@@ -4,7 +4,7 @@ import Bar from "./widget/bar/Bar"
 
 App.start({
     css: style,
-    instanceName: "js",
+    instanceName: "hyprshell",
     requestHandler(request, res) {
         print(request)
         res("ok")
