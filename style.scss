@@ -5,6 +5,7 @@ $theme_fg_color: "@theme_fg_color";
 $theme_bg_color: "@theme_bg_color";
 $theme_selected_bg_color: "@theme_selected_bg_color";
 $theme_selected_fg_color: "@theme_selected_fg_color";
+$insensitive_fg_color: "@insensitive_fg_color";
 $borders: "@borders";
 
 window.Bar {
@@ -20,11 +21,11 @@ window.Bar {
     background-color: #{$theme_bg_color};
     border-radius: 20px;
     margin: 4px 4px 0 4px;
-    padding: 0 10px 0 0;
+    padding: 0;
   }
 
   icon {
-    padding: 0 0.3em;
+    padding: 0 0.2em 0 0.4em;
     font-size: 22px;
   }
 
@@ -38,6 +39,33 @@ window.Bar {
         background-color: #{$theme_selected_bg_color};
         color: #{$theme_selected_fg_color};
       }
+    }
+  }
+
+  .Battery {
+    min-width: 140px;
+
+    label {
+      color: #{$theme_selected_fg_color};
+    }
+
+    .horizontal {
+      block {
+        margin: 0.7em 0.2em;
+        border-radius: 20px;
+      }
+    }
+  }
+
+  .Exit {
+    icon {
+      padding: 0;
+    }
+
+    button {
+      background-color: transparent;
+      margin: 2px;
+      border-radius: 20px;
     }
   }
 }

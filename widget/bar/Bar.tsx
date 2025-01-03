@@ -23,27 +23,32 @@ function SysTray() {
   </box>
 }
 
+function Exit() {
+  return <box className="Exit">
+    <button>
+      <icon icon="system-shutdown" />
+    </button>
+  </box>
+}
+
 function Wifi() {
   const { wifi } = Network.get_default()
 
   return <icon
     tooltipText={bind(wifi, "ssid").as(String)}
     className="Wifi"
-    icon={bind(wifi, "iconName")}
-    iconSize={22} />
+    icon={bind(wifi, "iconName")} />
 }
 
-function AudioSlider() {
+function AudioLevel() {
   const speaker = Wp.get_default()?.audio.defaultSpeaker!
 
-  return <box className="AudioSlider" css="min-width: 140px">
+  return <box className="AudioSlider">
     <icon 
-      icon={bind(speaker, "volumeIcon")}
-      iconSize={22} />
-    <slider
-      hexpand
-      onDragged={({ value }) => speaker.volume = value}
-      value={bind(speaker, "volume")} />
+      icon={bind(speaker, "volumeIcon")} />
+    <label label={bind(speaker, "volume").as(p =>
+      `${Math.round(p * 100)} %`
+    )} />
   </box>
 }
 
@@ -51,13 +56,20 @@ function BatteryLevel() {
   const bat = Battery.get_default()
 
   return <box className="Battery"
-    visible={bind(bat, "isPresent")}>
+      visible={bind(bat, "isPresent")} >
     <icon 
-      icon={bind(bat, "batteryIconName")} 
-      iconSize={22} />
-    <label label={bind(bat, "percentage").as(p =>
-      `${Math.floor(p * 100)} %`
-    )} />
+      icon={bind(bat, "batteryIconName")} />
+
+    <overlay>
+      <levelbar
+        hexpand
+        value={bind(bat, "percentage")} />
+
+      <label
+        label={bind(bat, "percentage").as(p =>
+          `${Math.floor(p * 100)} %`
+        )} /> 
+    </overlay>
   </box>
 }
 
@@ -80,7 +92,7 @@ function Workspaces() {
   </box>
 }
 
-function Time({ format = "%H:%M - %A %e." }) {
+function Time({ format = "%H:%M - %A, %d/%m" }) {
   const time = Variable<string>("").poll(1000, () =>
     GLib.DateTime.new_now_local().format(format)!)
 
@@ -109,8 +121,9 @@ export default function Bar(monitor: Gdk.Monitor) {
       <box hexpand halign={Gtk.Align.END} >
         <SysTray />
         <Wifi />
-        <AudioSlider />
+        <AudioLevel />
         <BatteryLevel />
+        <Exit />
       </box>
     </centerbox>
   </window>
