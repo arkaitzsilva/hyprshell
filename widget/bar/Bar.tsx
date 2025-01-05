@@ -47,7 +47,7 @@ function AudioLevel() {
     <icon 
       icon={bind(speaker, "volumeIcon")} />
     <label label={bind(speaker, "volume").as(p =>
-      `${Math.round(p * 100)} %`
+      `${Math.round(p * 100)}`
     )} />
   </box>
 }
