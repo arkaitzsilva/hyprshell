@@ -10,5 +10,5 @@ App.start({
     print(request)
     res("ok")
   },
-  main: () => App.get_monitors().map(Bar), Applauncher
+  main: () => App.get_monitors().map(Bar),
 })

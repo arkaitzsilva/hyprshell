@@ -1,0 +1,85 @@
+@use "sass:color";
+
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+$theme_fg_color: "@theme_fg_color";
+$theme_bg_color: "@theme_bg_color";
+$theme_selected_bg_color: "@theme_selected_bg_color";
+$theme_selected_fg_color: "@theme_selected_fg_color";
+$insensitive_fg_color: "@insensitive_fg_color";
+$borders: "@borders";
+
+window.Bar {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: #{$theme_fg_color};
+  font-size: 1.1em;
+  font-weight: bold;
+
+  >centerbox {
+    border: 1px solid #{$borders};
+    background-color: #{$theme_bg_color};
+    border-radius: 20px;
+    margin: 4px 4px 0 4px;
+    padding: 0;
+  }
+
+  icon {
+    font-size: 22px;
+    padding: 0;
+  }
+
+  .Workspaces {
+    button {
+      background-color: transparent;
+      border-radius: 50%;
+      margin: 3px;
+
+      &.focused {
+        background-color: #{$theme_selected_bg_color};
+        color: #{$theme_selected_fg_color};
+      }
+    }
+  }
+
+  .Audio {
+    icon {
+      padding: 0 0.1em 0 0.6em;
+    }
+  }
+
+  .Battery {
+    min-width: 140px;
+
+    icon {
+      padding: 0 0.1em 0 0.6em;
+    }
+
+    label {
+      color: #{$theme_selected_fg_color};
+    }
+
+    .horizontal {
+      block {
+        margin: 0.7em 0.2em;
+        border-radius: 20px;
+      }
+    }
+  }
+
+  .Exit {
+    button {
+      background-color: transparent;
+      margin: 3px;
+      border-radius: 20px;
+    }
+  }
+
+  .SysTray {
+    padding: 0 0.6em 0 0;
+
+    button {
+      background-color: transparent;
+    }
+  }
+}

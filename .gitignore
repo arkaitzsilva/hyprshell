@@ -1,4 +1,6 @@
 @girs/
 node_modules/
+builddir/
+result/
 tsconfig.json
 env.d.ts

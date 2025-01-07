@@ -40,10 +40,10 @@ function Wifi() {
     icon={bind(wifi, "iconName")} />
 }
 
-function AudioLevel() {
+function Audio() {
   const speaker = Wp.get_default()?.audio.defaultSpeaker!
 
-  return <box className="AudioSlider">
+  return <box className="Audio">
     <icon 
       icon={bind(speaker, "volumeIcon")} />
     <label label={bind(speaker, "volume").as(p =>
@@ -121,7 +121,7 @@ export default function Bar(monitor: Gdk.Monitor) {
       <box hexpand halign={Gtk.Align.END} >
         <SysTray />
         <Wifi />
-        <AudioLevel />
+        <Audio />
         <BatteryLevel />
         <Exit />
       </box>
