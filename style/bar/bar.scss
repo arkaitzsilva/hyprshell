@@ -1,4 +1,8 @@
-@use "sass:color";
+@use "sass:string";
+
+@function gtkalpha($c, $a) {
+  @return string.unquote("alpha(#{$c}, #{$a})");
+}
 
 // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
 $theme_fg_color: "@theme_fg_color";
@@ -6,7 +10,7 @@ $theme_bg_color: "@theme_bg_color";
 $theme_selected_bg_color: "@theme_selected_bg_color";
 $theme_selected_fg_color: "@theme_selected_fg_color";
 $insensitive_fg_color: "@insensitive_fg_color";
-$borders: "@borders";
+$borders: #{"@borders"};
 
 window.Bar {
   border: none;
@@ -17,7 +21,8 @@ window.Bar {
   font-weight: bold;
 
   >centerbox {
-    border: 1px solid #{$borders};
+    border: 1px solid;
+    border-color: gtkalpha($theme_selected_bg_color, .5);
     background-color: #{$theme_bg_color};
     border-radius: 20px;
     margin: 4px 4px 0 4px;
@@ -49,7 +54,7 @@ window.Bar {
   }
 
   .Battery {
-    min-width: 140px;
+    min-width: 160px;
 
     icon {
       padding: 0 0.1em 0 0.6em;
@@ -61,7 +66,7 @@ window.Bar {
 
     .horizontal {
       block {
-        margin: 0.7em 0.2em;
+        margin: 0.8em 0.2em;
         border-radius: 20px;
       }
     }

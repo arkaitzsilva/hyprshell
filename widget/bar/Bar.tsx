@@ -6,6 +6,7 @@ import Battery from "gi://AstalBattery"
 import Wp from "gi://AstalWp"
 import Network from "gi://AstalNetwork"
 import Tray from "gi://AstalTray"
+import { exec } from "astal/process"
 
 function SysTray() {
   const tray = Tray.get_default()
@@ -25,7 +26,7 @@ function SysTray() {
 
 function Exit() {
   return <box className="Exit">
-    <button>
+    <button onClicked={ () => exec("wlogout") }>
       <icon icon="system-shutdown" />
     </button>
   </box>

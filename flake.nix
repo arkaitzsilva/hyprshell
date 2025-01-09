@@ -3,7 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,42 +17,50 @@
     self,
     nixpkgs,
     ags,
+    astal,
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     packages.${system} = {
-      default = ags.lib.bundle {
-        inherit pkgs;
-        src = ./.;
+      default = pkgs.stdenv.mkDerivation {
         name = "hyprshell";
-        entry = "app.ts";
+        src = ./.;
 
-        # additional libraries and executables to add to gjs' runtime
-        extraPackages = [
-          ags.packages.${system}.battery
-          ags.packages.${system}.network
-          ags.packages.${system}.wireplumber
-          ags.packages.${system}.hyprland
-          ags.packages.${system}.tray
-          pkgs.gettext
+        nativeBuildInputs = with pkgs; [
+          meson
+          ninja
+          gobject-introspection
+          wrapGAppsHook
+          ags.packages.${system}.ags
         ];
-      };
-    };
 
-    devShells.${system} = {
-      default = pkgs.mkShell {
-        buildInputs = [
-          # includes all Astal libraries
-          ags.packages.${system}.agsFull
+        buildInputs =
+        (with astal.packages.${system}; [
+          astal3
+          io
+          apps
+          battery
+          bluetooth
+          hyprland
+          mpris
+          network
+          notifd
+          powerprofiles
+          tray
+          wireplumber
+        ])
+        ++ (with pkgs; [
+          gjs
+        ]);
 
-          # includes astal3 astal4 astal-io by default
-          #(ags.packages.${system}.default.override {
-          #  extraPackages = [
-          #    # cherry pick packages
-          #  ];
-          #})
-        ];
+        postInstall = ''
+          chmod +x $out/bin/$name
+          
+          if ! head -n 1 "$out/bin/$name" | grep -q "^#!"; then
+            sed -i '1i #!${pkgs.gjs}/bin/gjs -m' "$out/bin/$name"
+          fi
+        '';
       };
     };
   };
