@@ -4,7 +4,7 @@ project('hyprshell',
   license: 'GPL-3.0-only'
 )
 
-i18n = import('i18n')
+#i18n = import('i18n')
 
 prefix = get_option('prefix')
 pkgdatadir = prefix / get_option('datadir') / meson.project_name()
@@ -25,4 +25,4 @@ custom_target(
   install_dir: bindir,
 )
 
-subdir('po')
+#subdir('po')
