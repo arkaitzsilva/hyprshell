@@ -10,7 +10,7 @@ $theme_bg_color: "@theme_bg_color";
 $theme_selected_bg_color: "@theme_selected_bg_color";
 $theme_selected_fg_color: "@theme_selected_fg_color";
 $insensitive_fg_color: "@insensitive_fg_color";
-$borders: #{"@borders"};
+$borders: "@borders";
 
 window.Bar {
   border: none;
@@ -22,7 +22,7 @@ window.Bar {
 
   >centerbox {
     border: 1px solid;
-    border-color: gtkalpha($theme_selected_bg_color, .5);
+    border-color: gtkalpha($theme_selected_bg_color, .4);
     background-color: #{$theme_bg_color};
     border-radius: 20px;
     margin: 4px 4px 0 4px;
