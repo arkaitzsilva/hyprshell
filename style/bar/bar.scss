@@ -61,7 +61,8 @@ window.Bar {
     }
 
     label {
-      color: #{$theme_selected_fg_color};
+      color: gtkalpha($theme_selected_fg_color, .8);
+      
     }
 
     .horizontal {
