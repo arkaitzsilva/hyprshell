@@ -1,0 +1,36 @@
+@use "sass:string";
+
+$fg-color: #{"@theme_fg_color"};
+$bg-color: #{"@theme_bg_color"};
+$theme_selected_bg_color: #{"@theme_selected_bg_color"};
+
+@function gtkalpha($c, $a) {
+  @return string.unquote("alpha(#{$c}, #{$a})");
+}
+
+window.OSD {
+  box.OSD {
+    border-radius: 100px;
+    background-color: $bg-color;
+    padding: 13px 16px;
+    margin: 13px;
+    border: 1px solid;
+    border-color: gtkalpha($theme_selected_bg_color, .4);
+  }
+
+  icon {
+    font-size: 4rem;
+  }
+
+  levelbar {
+    trough {
+      min-width: 10rem;
+      margin: .5 .5rem;
+    }
+
+    block {
+      min-height: 1.5rem;
+      border-radius: 20px;
+    }
+  }
+}

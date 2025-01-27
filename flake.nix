@@ -52,6 +52,7 @@
         ])
         ++ (with pkgs; [
           gjs
+          brightnessctl
         ]);
 
         postInstall = ''
