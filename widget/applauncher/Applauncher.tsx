@@ -50,6 +50,7 @@ export default function Applauncher() {
         exclusivity={Astal.Exclusivity.IGNORE}
         keymode={Astal.Keymode.ON_DEMAND}
         application={App}
+        visible={false}
         onShow={(self) => {
             text.set("")
             width.set(self.get_current_monitor().workarea.width)
@@ -64,7 +65,7 @@ export default function Applauncher() {
                 <eventbox heightRequest={100} onClick={hide} />
                 <box widthRequest={500} className="Applauncher" vertical>
                     <entry
-                        placeholderText="Search"
+                        placeholderText="Search..."
                         text={text()}
                         onChanged={self => text.set(self.text)}
                         onActivate={onEnter}

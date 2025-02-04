@@ -13,7 +13,7 @@ App.start({
   },
   main() {
     App.get_monitors().map(Bar),
-    App.get_monitors().map(OSD),
     Applauncher()
+    //App.get_monitors().map(OSD),
   },
 })
