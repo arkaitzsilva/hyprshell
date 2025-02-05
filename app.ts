@@ -2,7 +2,8 @@ import { App } from "astal/gtk3"
 import style from "./style.scss"
 import Bar from "./widget/bar/Bar"
 import Applauncher from "./widget/applauncher/Applauncher"
-import OSD from "./widget/osd/OSD"
+import NotificationPopups from "./widget/notifications/NotificationPopups"
+import Logout from "./widget/logout/Logout"
 
 App.start({
   css: style,
@@ -13,7 +14,8 @@ App.start({
   },
   main() {
     App.get_monitors().map(Bar),
+    App.get_monitors().map(NotificationPopups),
+    Logout(),
     Applauncher()
-    //App.get_monitors().map(OSD),
   },
 })
