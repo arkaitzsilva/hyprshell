@@ -2,7 +2,7 @@ import { App, Astal, Gdk, Gtk } from "astal/gtk3"
 import { Variable } from "astal"
 
 function hide() {
-    App.get_window("launcher")!.hide()
+    App.get_window("logout")!.hide()
 }
 
 export default function Logout() {
@@ -24,8 +24,16 @@ export default function Logout() {
             <eventbox widthRequest={width(w => w / 2)} expand onClick={hide} />
             <box hexpand={false} vertical>
                 <eventbox heightRequest={100} onClick={hide} />
-                <box widthRequest={500} className="Logout" vertical>
-                    
+                <box widthRequest={100} className="Logout" vertical halign={CENTER} valign={CENTER}>
+                    <button>
+                        <box
+                            halign={CENTER}
+                            className="action"
+                            vertical>
+                            <icon icon="system-shutdown" />
+                            <label label="Apagar" />
+                        </box>
+                    </button>
                 </box>
                 <eventbox expand onClick={hide} />
             </box>

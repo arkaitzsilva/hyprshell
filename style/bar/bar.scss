@@ -39,6 +39,8 @@ window.Bar {
       background-color: transparent;
       border-radius: 50%;
       margin: 3px;
+      font-size: .8em;
+      font-weight: bold;
 
       &.focused {
         background-color: #{$theme_selected_bg_color};
@@ -61,8 +63,7 @@ window.Bar {
     }
 
     label {
-      color: gtkalpha($theme_selected_fg_color, .8);
-      
+      color: gtkalpha($theme_selected_fg_color, .8);      
     }
 
     .horizontal {
