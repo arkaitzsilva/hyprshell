@@ -10,17 +10,17 @@ $bg-color: #{"@theme_bg_color"};
 
 window#logout {
     all: unset;
-    background-color: gtkalpha($bg-color, .8);
+    background-color: $bg-color;
 
     box.Logout {
         background-color: $bg-color;
-        border-radius: 20px;
-        margin: 1rem;
-        padding: .8rem;
+        border-radius: 16px;
+        padding: .3rem;        
         box-shadow: 2px 3px 8px 0 gtkalpha(black, .4);
 
         button {
             border-radius: 10px;
+            margin: .6rem;
         }
 
         box.action {
