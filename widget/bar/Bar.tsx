@@ -41,13 +41,25 @@ function Wifi() {
     icon={bind(wifi, "iconName")} />
 }
 
-function Audio() {
+function Speaker() {
   const speaker = Wp.get_default()?.audio.defaultSpeaker!
 
-  return <box className="Audio">
+  return <box className="Speaker">
     <icon 
       icon={bind(speaker, "volumeIcon")} />
     <label label={bind(speaker, "volume").as(p =>
+      `${Math.round(p * 100)}`
+    )} />
+  </box>
+}
+
+function Mic() {
+  const mic = Wp.get_default()?.audio.defaultMicrophone!
+
+  return <box className="Mic">
+    <icon 
+      icon={bind(mic, "volumeIcon")} />
+    <label label={bind(mic, "volume").as(p =>
       `${Math.round(p * 100)}`
     )} />
   </box>
@@ -122,7 +134,8 @@ export default function Bar(monitor: Gdk.Monitor) {
       <box hexpand halign={Gtk.Align.END} >
         <SysTray />
         <Wifi />
-        <Audio />
+        <Speaker />
+        <Mic />
         <BatteryLevel />
         <Exit />
       </box>
