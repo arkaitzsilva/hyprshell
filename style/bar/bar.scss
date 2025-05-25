@@ -12,35 +12,42 @@ $theme_selected_fg_color: "@theme_selected_fg_color";
 $insensitive_fg_color: "@insensitive_fg_color";
 $borders: "@borders";
 
-window.Bar {
+window.bar {
   border: none;
   box-shadow: none;
   background: transparent;
   color: #{$theme_fg_color};
-  font-size: 1.1em;
+  font-size: 1.05rem;
   font-weight: bold;
 
   >centerbox {
-    border: 1px solid;
+    border: .075rem solid;
     border-color: gtkalpha($theme_selected_bg_color, .4);
     background-color: #{$theme_bg_color};
-    border-radius: 20px;
-    margin: 4px 4px 0 4px;
+    border-radius: 1.8rem;
+    margin: .3rem .3rem 0 .3rem;
     padding: 0;
+  }
+
+  button {
+    min-width: 0;
+    min-height: 0;
   }
 
   icon {
-    font-size: 22px;
+    font-size: 1.65rem;
     padding: 0;
+    margin: 0;
   }
 
-  .Workspaces {
+  .workspaces {
     button {
       background-color: transparent;
       border-radius: 50%;
-      margin: 3px;
-      font-size: .9em;
+      font-size: .975rem;
       font-weight: bold;
+      min-width: 1.65rem;
+      min-height: 1.65rem;
 
       &.focused {
         background-color: #{$theme_selected_bg_color};
@@ -49,24 +56,22 @@ window.Bar {
     }
   }
 
-  .Speaker {
-    icon {
-      padding: 0 0.1em 0 0.6em;
-    }
+  .icon-container {
+    margin: .15rem;
   }
 
-  .Mic {
-    icon {
-      padding: 0 0.1em 0 0.6em;
-    }
+  .only-icon {
+    padding: .3rem;
   }
 
-  .Battery {
+  .button-icon {
+    padding: .3rem;
+    background-color: transparent;
+    border-radius: 50%;
+  }
+
+  .battery {
     min-width: 160px;
-
-    icon {
-      padding: 0 0.1em 0 0.6em;
-    }
 
     label {
       color: gtkalpha($theme_selected_fg_color, .8);      
@@ -74,23 +79,13 @@ window.Bar {
 
     .horizontal {
       block {
-        margin: 0.8em 0.2em;
+        margin: .6em .225em;
         border-radius: 20px;
       }
     }
   }
 
-  .Exit {
-    button {
-      background-color: transparent;
-      margin: 3px;
-      border-radius: 20px;
-    }
-  }
-
-  .SysTray {
-    padding: 0 0.6em 0 0;
-
+  .sys-tray {
     button {
       background-color: transparent;
     }

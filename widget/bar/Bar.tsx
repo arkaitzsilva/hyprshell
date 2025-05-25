@@ -11,22 +11,22 @@ import { exec } from "astal/process"
 function SysTray() {
   const tray = Tray.get_default()
 
-  return <box className="SysTray">
+  return <box className="sys-tray">
     {bind(tray, "items").as(items => items.map(item => (
       <menubutton
         tooltipMarkup={bind(item, "tooltipMarkup")}
         usePopover={false}
         actionGroup={bind(item, "action-group").as(ag => ["dbusmenu", ag])}
         menuModel={bind(item, "menu-model")}>
-        <icon gicon={bind(item, "gicon")} />
+          <icon gicon={bind(item, "gicon")} />
       </menubutton>
     )))}
   </box>
 }
 
 function Exit() {
-  return <box className="Exit">
-    <button onClicked={ () => exec("wlogout") }>
+  return <box className="icon-container">
+    <button className="button-icon" onClicked={ () => exec("wlogout") }>
       <icon icon="system-shutdown" />
     </button>
   </box>
@@ -35,40 +35,39 @@ function Exit() {
 function Wifi() {
   const { wifi } = Network.get_default()
 
-  return <icon
-    tooltipText={bind(wifi, "ssid").as(String)}
-    className="Wifi"
-    icon={bind(wifi, "iconName")} />
+  return <box className="icon-container">
+    <icon
+      tooltipText={bind(wifi, "ssid").as(String)}
+      className="only-icon"
+      icon={bind(wifi, "iconName")} />
+  </box>
 }
 
 function Speaker() {
   const speaker = Wp.get_default()?.audio.defaultSpeaker!
 
-  return <box className="Speaker">
+  return <box className="icon-container">
     <icon 
+      className="only-icon"
       icon={bind(speaker, "volumeIcon")} />
-    <label label={bind(speaker, "volume").as(p =>
-      `${Math.round(p * 100)}`
-    )} />
   </box>
 }
 
 function Mic() {
   const mic = Wp.get_default()?.audio.defaultMicrophone!
 
-  return <box className="Mic">
-    <icon 
-      icon={bind(mic, "volumeIcon")} />
-    <label label={bind(mic, "volume").as(p =>
-      `${Math.round(p * 100)}`
-    )} />
+  return <box className="icon-container">
+    <button className="button-icon" onClicked={ () => exec("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle") }>
+      <icon icon={bind(mic, "volumeIcon")} />
+    </button>
+    
   </box>
 }
 
 function BatteryLevel() {
   const bat = Battery.get_default()
 
-  return <box className="Battery"
+  return <box className="battery"
       visible={bind(bat, "isPresent")} >
     <icon 
       icon={bind(bat, "batteryIconName")} />
@@ -89,14 +88,14 @@ function BatteryLevel() {
 function Workspaces() {
   const hypr = Hyprland.get_default()
 
-  return <box className="Workspaces">
+  return <box className="workspaces">
     {bind(hypr, "workspaces").as(wss => wss
       .filter(ws => !(ws.id >= -99 && ws.id <= -2)) // filter out special workspaces
       .sort((a, b) => a.id - b.id)
       .map(ws => (
         <button
           className={bind(hypr, "focusedWorkspace").as(fw =>
-            ws === fw ? "focused" : "")}
+            ws === fw ? "focused icon-container" : "icon-container")}
           onClicked={() => ws.focus()}>
             {ws.id}
         </button>
@@ -110,7 +109,7 @@ function Time({ format = "%H:%M - %A, %d/%m" }) {
     GLib.DateTime.new_now_local().format(format)!)
 
   return <label
-    className="Time"
+    className="time"
     onDestroy={() => time.drop()}
     label={time()}
   />
@@ -120,13 +119,13 @@ export default function Bar(monitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
 
   return <window
-    className="Bar"
+    className="bar"
     gdkmonitor={monitor}
     exclusivity={Astal.Exclusivity.EXCLUSIVE}
     anchor={TOP | LEFT | RIGHT}>
     <centerbox>
       <box hexpand halign={Gtk.Align.START}>
-        <Workspaces />
+       <Workspaces />
       </box>
       <box>
         <Time />
@@ -134,8 +133,8 @@ export default function Bar(monitor: Gdk.Monitor) {
       <box hexpand halign={Gtk.Align.END} >
         <SysTray />
         <Wifi />
-        <Speaker />
         <Mic />
+        <Speaker />
         <BatteryLevel />
         <Exit />
       </box>
