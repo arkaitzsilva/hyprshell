@@ -27,7 +27,7 @@ function SysTray() {
 function Exit() {
   return <box className="icon-container">
     <button className="button-icon" onClicked={ () => exec("wlogout") }>
-      <icon icon="system-shutdown" />
+      <icon icon="system-shutdown-symbolic" />
     </button>
   </box>
 }
@@ -50,6 +50,7 @@ function Speaker() {
     <icon 
       className="only-icon"
       icon={bind(speaker, "volumeIcon")} />
+    <label label={bind(speaker, "volume").as(p => `${Math.round(p * 100)}`)} />
   </box>
 }
 

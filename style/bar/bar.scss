@@ -22,16 +22,16 @@ window.bar {
 
   >centerbox {
     border: .075rem solid;
-    border-color: gtkalpha($theme_selected_bg_color, .4);
+    border-color: gtkalpha($theme_selected_bg_color, .5);
     background-color: #{$theme_bg_color};
     border-radius: 1.8rem;
     margin: .3rem .3rem 0 .3rem;
-    padding: 0;
+    padding: .15rem;
   }
 
   button {
-    min-width: 0;
-    min-height: 0;
+    min-width: 1.65rem;
+    min-height: 1.65rem;
   }
 
   icon {
@@ -46,8 +46,6 @@ window.bar {
       border-radius: 50%;
       font-size: .975rem;
       font-weight: bold;
-      min-width: 1.65rem;
-      min-height: 1.65rem;
 
       &.focused {
         background-color: #{$theme_selected_bg_color};
